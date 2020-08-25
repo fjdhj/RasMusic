@@ -8,12 +8,14 @@ import fr.fjdhj.rasmusic.utils.XMLUtil;
 
 public class Core {
 
-	private WebRadio webRadioPlayer;
+	private WebRadio webRadio;
+	private PlayerModule player;
 	
 	public Core() {
 		ArrayList<Radio> liste = new ArrayList<Radio>();
 		XMLUtil.loadRadioList(liste);
-		webRadioPlayer = new WebRadio(liste);
+		webRadio = new WebRadio(liste);
+		player = new PlayerModule(webRadio.getURL());
 	}
 	
 	
@@ -21,14 +23,20 @@ public class Core {
 		String reponse = "";
 		System.out.println("REQUETE :" + request);
 		switch(request) {
-		case "/radiolist":
+		case "/radiolist":// 		/radiolist
 			reponse += XMLUtil.loadRadioListAsXML();
 			break;
-		case "/selectRadio":
+		case "/selectRadio":// 		/selectRadio X
+			if(args.length>0) {
+				int ID = Integer.parseInt(args[0]);
+				webRadio.selectByID(ID);
+			}
 			break;
-		case "/play" :
+		case "/play" ://	 /play
+			player.play();
 			break;
-		case "/pause" :
+		case "/pause" ://		/pause
+			player.pause();
 			break;
 		}
 			
