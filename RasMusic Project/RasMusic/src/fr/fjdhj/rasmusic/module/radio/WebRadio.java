@@ -11,6 +11,7 @@ public class WebRadio{
 	
 	public WebRadio(ArrayList<Radio> liste) {
 		radioList = liste;
+		currentRadio = radioList.get(0);
 	}
 
 	public URL getURL() {return currentRadio.getUrl();}
