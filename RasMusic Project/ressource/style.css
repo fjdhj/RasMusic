@@ -10,7 +10,6 @@ div.containeur{
 }
 
 img.radio{
-	
 	width: 200%;
 	max-width: 100px;
 }
@@ -18,5 +17,8 @@ img.radio{
 .invisible{
 	background-color:   #1a1a1a;
 	border: 0;
+	width: 200%;
+	padding: 0;
+	max-width: 100px;
 	
 }
