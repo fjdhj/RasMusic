@@ -1,0 +1,22 @@
+body{
+	background-color:   #333333;
+}
+
+div.containeur{
+	background-color: #1a1a1a;
+	border-radius: 15px;
+	width: 100%;
+	max-width: 300px;
+}
+
+img.radio{
+	
+	width: 200%;
+	max-width: 100px;
+}
+
+.invisible{
+	background-color:   #1a1a1a;
+	border: 0;
+	
+}
