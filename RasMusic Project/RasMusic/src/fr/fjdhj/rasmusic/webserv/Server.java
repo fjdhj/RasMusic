@@ -141,6 +141,7 @@ public class Server{
 			}
 				
 		});
+		servMain.setName("servMain");
 		servMain.start();
 	}
 	
