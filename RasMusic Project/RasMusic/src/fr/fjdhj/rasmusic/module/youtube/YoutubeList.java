@@ -17,10 +17,6 @@ import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.ChannelListResponse;
-
-import fr.fjdhj.rasmusic.RasMusic;
 
 public class YoutubeList {
 
@@ -37,7 +33,7 @@ public class YoutubeList {
      * @return an authorized Credential object.
      * @throws IOException
      */
-    public static Credential authorize(final NetHttpTransport httpTransport) throws IOException {
+    /*public static Credential authorize(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
         InputStream in = RasMusic.class.getResourceAsStream(CLIENT_SECRETS);
         GoogleClientSecrets clientSecrets =
@@ -50,7 +46,7 @@ public class YoutubeList {
         Credential credential =
             new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
         return credential;
-    }
+    }*/
 
     /**
      * Build and return an authorized API client service.
@@ -58,14 +54,14 @@ public class YoutubeList {
      * @return an authorized API client service
      * @throws GeneralSecurityException, IOException
      */
-    public static YouTube getService() throws GeneralSecurityException, IOException {
+    /*public static YouTube getService() throws GeneralSecurityException, IOException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = authorize(httpTransport);
         System.out.println(credential);
         return new YouTube.Builder(httpTransport, JSON_FACTORY, credential)
             .setApplicationName(APPLICATION_NAME)
             .build();
-    }
+    }*/
 
     /**
      * Call function to create API service object. Define and
@@ -73,7 +69,7 @@ public class YoutubeList {
      *
      * @throws GeneralSecurityException, IOException, GoogleJsonResponseException
      */
-    public static void main(String[] args)
+    /*public static void main(String[] args) {
         throws GeneralSecurityException, IOException, GoogleJsonResponseException {
         YouTube youtubeService = getService();
         // Define and execute the API request
@@ -81,6 +77,6 @@ public class YoutubeList {
             .list("");
         ChannelListResponse response = request.execute();
         System.out.println(response);
-    }
-	
+    	}
+    }	*/
 }
