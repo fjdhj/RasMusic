@@ -48,6 +48,12 @@ public class Core {
 		case "/pause" ://		/pause
 			player.pause();
 			break;
+		case "/getimage":
+			reponse+=webRadio.getImageURL();
+			break;
+		case "/getname":
+			reponse+=webRadio.getName();
+			break;
 		}
 			
 		

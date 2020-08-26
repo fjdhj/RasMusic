@@ -15,6 +15,8 @@ public class WebRadio{
 	}
 
 	public URL getURL() {return currentRadio.getUrl();}
+	public URL getImageURL() {return currentRadio.getIcon();}
+	public String getName() {return currentRadio.getName();}
 	
 	public void setRadioList(ArrayList<Radio> liste) {radioList = liste;}
 	/**
