@@ -82,7 +82,9 @@ public class Server{
 							//Une requetes a l'API
 							if(fileRequested.contains("/api/")) {
 								//On envoie la commande
-								core.execRequest(fileRequested.substring(fileRequested.lastIndexOf("/")), null);
+								String resp = core.execRequest(fileRequested.substring(fileRequested.lastIndexOf("/")), null);
+								byte[] data = resp.getBytes();
+								GET_HEADmethod("200 OK", "text/plain", data.length, true, data);
 							}else{
 								//Une demande de fichier
 								if(fileRequested.equals("/")) {	
@@ -99,7 +101,7 @@ public class Server{
 									GET_HEADmethod("200 OK", file);
 
 								}else {
-									GET_HEADmethod(new Error404(fileRequested).getErrorCode(), null);
+									GET_HEADmethod(new Error404(fileRequested).getErrorCode(), "", 0, false, null);
 									System.err.println("404 Error " + fileRequested);
 								}
 							}
@@ -145,37 +147,28 @@ public class Server{
 		servMain.start();
 	}
 	
-	private boolean GET_HEADmethod(String HTTPstatus, File file) throws IOException {
+	private boolean GET_HEADmethod(String HTTPstatus, String MIMEtype, int len, boolean body, byte[] bodyContent) throws IOException {
 		try {
-
 			//On ouvres les flux d'ecriture
 			out = new PrintWriter(client.getOutputStream());
 			dataOut = new BufferedOutputStream(client.getOutputStream());
-			
-			System.out.println(client.getInetAddress() +" need "+ file);
-			System.out.println("Methods : GET_HEAD\n");
-			
-			
+		
 			out.println("HTTP/1.1 "+HTTPstatus);
 			out.println("Server: Java HTTP server for RasMus");
 			out.println("Date: " + new Date());
 			//On regarde si on a un fichier a envoyer
-			if(file!=null) {
-				out.println("Content-type: "+MIMEtype(file.toString()));
-				out.println("Content-lenght: "+file.length());
+			if(body) {
+				out.println("Content-type: "+MIMEtype);
+				out.println("Content-lenght: "+len);
 			}
 			
 			out.println();
 			out.flush();
-			
-			if(file!=null) {
-				dataOut.write(readFileData(file), 0, (int) file.length());
+		
+			if(body) {
+				dataOut.write(bodyContent, 0, len);
 				dataOut.flush();
 			}
-
-						
-			
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -185,6 +178,20 @@ public class Server{
 			dataOut.close();
 		}
 		return true;
+		
+	}
+	
+	private boolean GET_HEADmethod(String HTTPstatus, File file) throws IOException {
+			
+			System.out.println(client.getInetAddress() +" need "+ file);
+			System.out.println("Methods : GET_HEAD\n");
+			
+			String MIMEtype = MIMEtype(file.toString());
+			int len = (int) file.length();
+			
+			byte[] data = readFileData(file);
+			
+			return GET_HEADmethod(HTTPstatus, MIMEtype, len, true, data);
 	}
 	
 	private byte[]readFileData(File file) throws IOException, FileNotFoundException{
