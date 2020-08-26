@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 
 import fr.fjdhj.rasmusic.module.radio.Radio;
-import fr.fjdhj.rasmusic.module.radio.WebRadio;
+import fr.fjdhj.rasmusic.module.radio.SongManager;
 import fr.fjdhj.rasmusic.utils.XMLUtil;
 
 public class Core {
 
-	private WebRadio webRadio;
+	private SongManager webRadio;
 	private PlayerModule player;
 	
 	public Core() {
 		ArrayList<Radio> liste = new ArrayList<Radio>();
 		XMLUtil.loadRadioList(liste);
-		webRadio = new WebRadio(liste);
+		webRadio = new SongManager(liste);
 		player = new PlayerModule(webRadio.getURL());
 	}
 	
@@ -27,12 +27,6 @@ public class Core {
 		switch(request) {
 		case "/radiolist":// 		/radiolist
 			reponse += XMLUtil.loadRadioListAsXML();
-			break;
-		case "/selectRadio":// 		/selectRadio X
-			if(args.length>0) {
-				int ID = Integer.parseInt(args[0]);
-				webRadio.selectByID(ID);
-			}
 			break;
 		case "/play" ://	 /play
 			try {
@@ -48,9 +42,28 @@ public class Core {
 		case "/pause" ://		/pause
 			player.pause();
 			break;
+			
+		case "/selectRadio":// 		/selectRadio X
+			selectRadio(args);
+			break;
 		}
 			
 		
 		return reponse;
+	}
+	
+	private String selectRadio(String[] args) {
+		String rep = "";
+		if(args.length>0) {
+			try{
+				int ID = Integer.parseInt(args[0]);
+				webRadio.selectByID(ID);
+			}catch(NumberFormatException ex) {
+				System.err.println("[ERROR] Bad request : Radio selection invalid argument");
+			}
+		}else {
+			System.err.println("[ERROR] Bad request : Radio selection without argument");
+		}
+		return rep;
 	}
 }

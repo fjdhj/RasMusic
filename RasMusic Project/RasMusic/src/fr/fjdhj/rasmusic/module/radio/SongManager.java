@@ -3,13 +3,13 @@ package fr.fjdhj.rasmusic.module.radio;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class WebRadio{
+public class SongManager{
 	
 	private ArrayList<Radio> radioList = new ArrayList<Radio>();
 	
 	private Radio currentRadio;
 	
-	public WebRadio(ArrayList<Radio> liste) {
+	public SongManager(ArrayList<Radio> liste) {
 		radioList = liste;
 		currentRadio = radioList.get(0);
 	}
