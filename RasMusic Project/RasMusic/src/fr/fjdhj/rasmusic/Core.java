@@ -2,6 +2,8 @@ package fr.fjdhj.rasmusic;
 
 import java.util.ArrayList;
 
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
+
 import fr.fjdhj.rasmusic.module.radio.Radio;
 import fr.fjdhj.rasmusic.module.radio.WebRadio;
 import fr.fjdhj.rasmusic.utils.XMLUtil;
@@ -33,7 +35,15 @@ public class Core {
 			}
 			break;
 		case "/play" ://	 /play
-			player.play();
+			try {
+				if(player.isPaused()) {
+					player.resume();
+				}else {
+					player.play();
+				}
+			} catch (StreamPlayerException e) {
+				e.printStackTrace();
+			}
 			break;
 		case "/pause" ://		/pause
 			player.pause();
