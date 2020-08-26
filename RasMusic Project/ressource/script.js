@@ -13,26 +13,27 @@ function updateRadio(){
 
 	
 	var imgReq = new XMLHttpRequest();
-	imgReq.open("GET", ip+"/api/getimage");
-	imgReq.send(null);
 	imgReq.addEventListener('readystatechange', function() {
-    	if (xhr.readyState === XMLHttpRequest.DONE) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
-        // Votre code…
+    	if (imgReq.readyState === XMLHttpRequest.DONE && imgReq.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
+        	document.getElementById("radioImage").src = imgReq.responseText;
     	}	
     });
+	imgReq.open("GET", ip+"/api/getimage");
+	imgReq.send(null);
+
 }
 updateRadio();
 
 function play(){
     var xmlHttp = new XMLHttpRequest();
     if(isPlaying == 0){
-    	document.getElementById("playpauseimg").src="play.svg"
+    	document.getElementById("playpauseimg").src="pause.svg"
     	xmlHttp.open("HEAD",ip+"/api/play");
     	xmlHttp.send(null);
     	isPlaying = 1;
 	    console.log("REQUETE GET à " + ip+"/api/play");
     }else{
-     	document.getElementById("playpauseimg").src="pause.svg"
+     	document.getElementById("playpauseimg").src="play.svg"
     	xmlHttp.open("HEAD",ip+"/api/pause");
     	xmlHttp.send(null);
     	isPlaying = 0;
