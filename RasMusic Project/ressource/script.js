@@ -24,6 +24,15 @@ function updateRadio(){
 }
 updateRadio();
 
+
+function prev(){
+	
+}
+
+function next(){
+	
+}
+
 function play(){
     var xmlHttp = new XMLHttpRequest();
     if(isPlaying == 0){
