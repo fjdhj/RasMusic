@@ -7,8 +7,10 @@ public enum HTTPMethod {
 	HEAD("HEAD"),
 ;
 
-private String message;
+public String message;
 HTTPMethod(String string) {
 	message = string;
 }
+
+
 }

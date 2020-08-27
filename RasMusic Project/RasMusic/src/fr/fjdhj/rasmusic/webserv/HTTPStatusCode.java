@@ -1,5 +1,7 @@
 package fr.fjdhj.rasmusic.webserv;
 
+import com.google.api.client.http.HttpStatusCodes;
+
 public enum HTTPStatusCode {
 	code200("200 OK"),
 	code201("201 Created"),
@@ -10,7 +12,7 @@ public enum HTTPStatusCode {
 	;
 
 
-private String message;
+public final String message;
 HTTPStatusCode(String string) {
 	message = string;
 }
