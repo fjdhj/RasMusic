@@ -1,24 +1,48 @@
 body{
-	background-color:   #333333;
+	background-color:   #333333;	
 }
 
-div.containeur{
+div.module{
 	background-color: #1a1a1a;
 	border-radius: 15px;
 	width: 100%;
-	max-width: 300px;
+	min-width: 400px;
+	max-width: 500px;
+	text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+div.root{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+	
 }
 
 img.radio{
-	width: 200%;
+	width: 100%;
+	min-width: 35px;
 	max-width: 100px;
+	
 }
 
 .invisible{
 	background-color:   #1a1a1a;
 	border: 0;
-	width: 200%;
+	width: 20%;
 	padding: 0;
-	max-width: 100px;
+	min-width: 35px;
+	max-width: 100;
+	
+}
+
+
+
+
+/*POUR UN MENU DEROULANT*/
+.sous{
 	
 }

@@ -14,19 +14,27 @@ public class Core {
 	private PlayerModule player;
 	
 	public Core() {
-		ArrayList<Radio> liste = new ArrayList<Radio>();
-		XMLUtil.loadRadioList(liste);
-		webRadio = new SongManager(liste);
+		webRadio = new SongManager(XMLUtil.loadRadioList());
 		player = new PlayerModule(webRadio.getURL());
 	}
 	
 	
-	public String execRequest(String request, String[] args) {
+	public String execRequest(String[] args) {
 		String reponse = "";
-		System.out.println("REQUETE :" + request);
+		String debug = "";
+		String request = args[0];
+		for(String arg : args) {
+			debug+= "  ||  "+arg;
+		}
+		System.out.println("REQUETE :" +  debug);
 		switch(request) {
 		case "/radiolist":// 		/radiolist
 			reponse += XMLUtil.loadRadioListAsXML();
+			break;
+		case "/selectRadio":// 		/selectRadio X
+			webRadio.selectByID(args[1]);
+			player.stop();
+			player = new PlayerModule(webRadio.getURL());
 			break;
 		case "/play" ://	 /play
 			try {
@@ -42,9 +50,15 @@ public class Core {
 		case "/pause" ://		/pause
 			player.pause();
 			break;
-			
-		case "/selectRadio":// 		/selectRadio X
-			selectRadio(args);
+
+		case "/stop":
+			player.stop();
+			break;
+		case "/getimage":
+			reponse+=webRadio.getImageURL();
+			break;
+		case "/getname":
+			reponse+=webRadio.getName();
 			break;
 		}
 			
