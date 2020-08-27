@@ -50,6 +50,7 @@ public class Core {
 		case "/pause" ://		/pause
 			player.pause();
 			break;
+
 		case "/stop":
 			player.stop();
 			break;
@@ -63,5 +64,20 @@ public class Core {
 			
 		
 		return reponse;
+	}
+	
+	private String selectRadio(String[] args) {
+		String rep = "";
+		if(args.length>0) {
+			try{
+				int ID = Integer.parseInt(args[0]);
+				webRadio.selectByID(ID);
+			}catch(NumberFormatException ex) {
+				System.err.println("[ERROR] Bad request : Radio selection invalid argument");
+			}
+		}else {
+			System.err.println("[ERROR] Bad request : Radio selection without argument");
+		}
+		return rep;
 	}
 }

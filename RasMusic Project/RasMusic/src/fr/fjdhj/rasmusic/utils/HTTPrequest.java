@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.omg.CORBA.RepositoryIdHelper;
 
 public class HTTPrequest {
 	public static Object[] POST(String URL, String contentType, String content, String sentcookie, Map<String, String> customHeader) {
