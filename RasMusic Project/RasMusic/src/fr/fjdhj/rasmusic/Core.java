@@ -5,34 +5,36 @@ import java.util.ArrayList;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 
 import fr.fjdhj.rasmusic.module.radio.Radio;
-import fr.fjdhj.rasmusic.module.radio.WebRadio;
+import fr.fjdhj.rasmusic.module.radio.SongManager;
 import fr.fjdhj.rasmusic.utils.XMLUtil;
 
 public class Core {
 
-	private WebRadio webRadio;
+	private SongManager webRadio;
 	private PlayerModule player;
 	
 	public Core() {
-		ArrayList<Radio> liste = new ArrayList<Radio>();
-		XMLUtil.loadRadioList(liste);
-		webRadio = new WebRadio(liste);
+		webRadio = new SongManager(XMLUtil.loadRadioList());
 		player = new PlayerModule(webRadio.getURL());
 	}
 	
 	
-	public String execRequest(String request, String[] args) {
+	public String execRequest(String[] args) {
 		String reponse = "";
-		System.out.println("REQUETE :" + request);
+		String debug = "";
+		String request = args[0];
+		for(String arg : args) {
+			debug+= "  ||  "+arg;
+		}
+		System.out.println("REQUETE :" +  debug);
 		switch(request) {
 		case "/radiolist":// 		/radiolist
 			reponse += XMLUtil.loadRadioListAsXML();
 			break;
 		case "/selectRadio":// 		/selectRadio X
-			if(args.length>0) {
-				int ID = Integer.parseInt(args[0]);
-				webRadio.selectByID(ID);
-			}
+			webRadio.selectByID(args[1]);
+			player.stop();
+			player = new PlayerModule(webRadio.getURL());
 			break;
 		case "/play" ://	 /play
 			try {
@@ -47,6 +49,9 @@ public class Core {
 			break;
 		case "/pause" ://		/pause
 			player.pause();
+			break;
+		case "/stop":
+			player.stop();
 			break;
 		case "/getimage":
 			reponse+=webRadio.getImageURL();
