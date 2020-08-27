@@ -79,6 +79,7 @@ public class HTTPUtil {
 	public static void sendHTTPRequest(HTTPRequest request, OutputStream out) throws IOException {
 		BufferedOutputStream dataout = new BufferedOutputStream(out);
 		dataout.write(request.getRequestAsByteArray());
+		dataout.flush();
 	}
 	
 	/*
@@ -87,6 +88,7 @@ public class HTTPUtil {
 	public static void sendHTTPResponse(HTTPResponse response, OutputStream out) throws IOException {
 		BufferedOutputStream dataout = new BufferedOutputStream(out);
 		dataout.write(response.getRequestAsByteArray());
+		dataout.flush();
 	}
 	
 }

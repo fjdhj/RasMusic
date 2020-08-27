@@ -10,6 +10,9 @@ public class HTTPResponse extends HTTPMessage{
 	
 	public HTTPResponse(HTTPStatusCode code, HashMap<String, String> headers, byte[] body) {
 		this.code=code; 
+		if(headers == null) {
+			headers = new HashMap<String, String>();
+		}
 		this.headers=headers; 
 		this.body=body; 
 	}
@@ -46,12 +49,17 @@ public class HTTPResponse extends HTTPMessage{
 		String message = "HTTP/1.1 "+statusName + "\r\n"
 					   + headersString + "\r\n\r\n";
 		byte[] head = message.getBytes(); 
-		int bodylen = body.length;
-		int headlen = head.length;
-		byte[] sum = new byte[bodylen + headlen];
-		
-		System.arraycopy(head, 0, sum, 0, headlen);
-		System.arraycopy(bodylen, 0, sum, headlen, bodylen);
-		return sum;
+		if(body == null || body.length==0) {
+			return head;
+		}else {
+			int bodylen = body.length;
+			int headlen = head.length;
+			byte[] sum = new byte[bodylen + headlen];
+			
+			System.arraycopy(head, 0, sum, 0, headlen);
+			System.arraycopy(bodylen, 0, sum, headlen, bodylen);
+			return sum;
+		}
+
 	}
 }
