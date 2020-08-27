@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,20 +22,19 @@ import fr.fjdhj.rasmusic.module.radio.Radio;
 public class XMLUtil {
 	private static final String RADIOLIST_PATH = "ressource/radiolist/";
 	
-	public static void loadRadioList(ArrayList<Radio> emptyList) {
-		if(!emptyList.isEmpty()) {emptyList.clear();
-			System.out.println("[WARNING] Loading radio list: The non empty list has been cleared.");}
-		
+	public static HashMap<String,Radio> loadRadioList() {
+		HashMap<String,Radio> liste = new HashMap<String,Radio>();		
 		File root = new File(RADIOLIST_PATH);
 		System.out.println(root.getAbsolutePath());
 		for(File file : root.listFiles()) {
 			if(!file.isDirectory()) {
-				processRadioFile(emptyList, file);
+				processRadioFile(liste, file);
 			}
 		}
+		return liste;
 	}
 
-	private static void processRadioFile(ArrayList<Radio> emptyList, File file) {
+	private static void processRadioFile(HashMap<String,Radio> liste, File file) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		
@@ -56,7 +56,7 @@ public class XMLUtil {
 						iconurl = new URL(((Element) child).getAttribute("icon"));
 					}catch(java.net.MalformedURLException ex) {}
 					
-					emptyList.add(new Radio(name, url, iconurl));
+					liste.put(name,new Radio(name, url, iconurl));
 				}
 			}
 		

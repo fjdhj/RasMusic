@@ -11,10 +11,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
-
 
 import fr.fjdhj.rasmusic.Core;
 import fr.fjdhj.rasmusic.RasMusic;
@@ -63,14 +64,13 @@ public class Server{
 						ArrayList<String> headers = new ArrayList<String>();
 						while(!(line=in.readLine()).isEmpty()) {
 							headers.add(line);
-							System.out.println(line);
 						}
 
 						
 						StringTokenizer parse = new StringTokenizer(headers.get(0));
 						String methods = parse.nextToken().toUpperCase(); //On récupère la méthode HTTP du client
 						//On récupère le fichier demandé
-						fileRequested= parse.nextToken().toLowerCase();
+						fileRequested= URLDecoder.decode(parse.nextToken(),StandardCharsets.UTF_8);
 						
 						//Le serveur ne supporte que les methods GET et HEAD, on verifie :
 						if(methods.equals("GET") || methods.equals("HEAD")) {
@@ -82,7 +82,9 @@ public class Server{
 							//Une requetes a l'API
 							if(fileRequested.contains("/api/")) {
 								//On envoie la commande
-								String resp = core.execRequest(fileRequested.substring(fileRequested.lastIndexOf("/")), null);
+								String commande = fileRequested.substring(fileRequested.lastIndexOf("/"));
+								String[] args = commande.split("-");
+								String resp = core.execRequest(args);
 								byte[] data = resp.getBytes();
 								GET_HEADmethod("200 OK", "text/plain", data.length, true, data);
 							}else{

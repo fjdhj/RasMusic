@@ -22,8 +22,6 @@ function updateRadio(){
 	imgReq.send(null);
 
 }
-updateRadio();
-
 
 function prev(){
 	
@@ -31,6 +29,15 @@ function prev(){
 
 function next(){
 	
+}
+
+function selectRadio(var radioName){
+var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("HEAD",ip+"/api/selectRadio-radioName");
+	xmlHttp.send(null);
+	isPlaying = 1;
+    console.log("REQUETE HEAD à " + ip+"/api/selectRadio-radioName");
+	updateRadio();
 }
 
 function play(){
@@ -53,3 +60,6 @@ function play(){
 function processRadioList(){
 
 }
+
+updateRadio();
+
