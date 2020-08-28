@@ -88,6 +88,7 @@ public class Core {
 			webRadio.selectByID(args[1]);
 			player.stop();
 			player = new PlayerModule(webRadio.getURL());
+			reponse = HTTPTemplates.ok200();
 			break;
 		case "/play" ://	 /play
 			try {
@@ -96,20 +97,23 @@ public class Core {
 				}else {
 					player.play();
 				}
+				reponse = HTTPTemplates.ok200();
 			} catch (StreamPlayerException e) {
+				reponse = HTTPTemplates.error500();
 				e.printStackTrace();
 			}
 			break;
 		case "/pause" ://		/pause
 			player.pause();
+			reponse = HTTPTemplates.ok200();
 			break;
 
 		case "/stop":
 			player.stop();
+			reponse = HTTPTemplates.ok200();
 			break;
 		case "/getimage":
 			reponse = HTTPTemplates.plainText(webRadio.getImageURL().toString());
-
 			break;
 		case "/getname":
 			reponse = HTTPTemplates.plainText(webRadio.getName());
