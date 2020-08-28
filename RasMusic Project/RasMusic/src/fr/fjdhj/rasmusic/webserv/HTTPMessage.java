@@ -11,7 +11,7 @@ public abstract class HTTPMessage {
 	protected byte[] body;
 	
 	public void addHeader(String key, String value) {
-		if(key.isEmpty() && key!=null && value.isEmpty() && value!=null) {
+		if(!key.isEmpty() && key!=null && !value.isEmpty() && value!=null) {
 			headers.put(key, value);
 		}
 	}
@@ -26,7 +26,8 @@ public abstract class HTTPMessage {
 	}
 	
 	/*
-	 * Get the header value associated with the given key
+	 * Get the header value associated with the given key, return null if the key
+	 * has no value associated with it
 	 * */
 	public String getHeaderValue(String key) {
 		if(headers.containsKey(key)) {
@@ -42,6 +43,14 @@ public abstract class HTTPMessage {
 	public byte[] getBody() {
 		return body;
 	}
+	
+	/*
+	 * Return true if the header key is in the request
+	 * */
+	public boolean contains(String header) {
+		return headers.containsKey(header);
+	}
+	
 	/*
 	 * Get the content length
 	 * Return 0 if there is no content length
