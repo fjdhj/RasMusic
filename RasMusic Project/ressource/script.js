@@ -66,13 +66,19 @@ function getRadioList(){
 	radioList.addEventListener('readystatechange', function(){
 		if (radioList.readyState === XMLHttpRequest.DONE && radioList.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
         	console.log(radioList);
-			var radio = radioList.responseXML.getElementsByTagName('radio');
-			document.getElementById("radioList").innerHTML = '<select class="radioList">';
+			var parser = new DOMParser();
+			var XMLdocument = parser.parseFromString(radioList.response,"application/xml");
+			var radio = XMLdocument.getElementsByTagName('radio');
+			var list = "";
+			
+			list += '<select class="radioList" size=3>';
 			var i;
 			for(i = 0; i < radio.length; i++){
-				document.getElementById("radioList").innerHTML += ' <option value="'+radio[i].childNodes[0]+'">'+radio[i].childNodes[0]+'</option>';
+				list += ' <option class="radioList" value="'+radio[i].getAttribute("name")+'">'+'<img src="'+radio[i].getAttribute("icon")+'"></img>'+radio[i].getAttribute("name")+'</option>';
 			}
-			document.getElementById("radioList").innerHTML = '</select>';
+			list += '</select>';
+			console.log(list);
+			document.getElementById("radioList").innerHTML = list;
    		}
 	});
 	radioList.open("GET", ip+"/api/radiolist");

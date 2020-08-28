@@ -113,21 +113,22 @@ public class XMLUtil {
 		for(int i=attributs.getLength()-1; i>=0;i--) {
 			String nom = attributs.item(i).getNodeName();
 			String val = attributs.item(i).getNodeValue();
-			data += (nom + "=\"" + val +"\"");
+			data += (nom + "=\"" + val +"\" ");
 		}
 		data+="></"+child.getNodeName()+">";
 		return data;
 	}
 
 	public static String loadRadioListAsXML() {
-		String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root>";
 		File root = new File(RADIOLIST_PATH);
 		System.out.println(root.getAbsolutePath());
 		for(File file : root.listFiles()) {
 			if(!file.isDirectory()) {
-				content += processRadioFile(file)+ "\n";
+				content += processRadioFile(file);
 			}
 		}
+		content += "</root>";
 		return content;
 	}
 }

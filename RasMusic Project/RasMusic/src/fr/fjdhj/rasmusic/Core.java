@@ -8,6 +8,7 @@ import fr.fjdhj.rasmusic.module.radio.SongManager;
 import fr.fjdhj.rasmusic.templates.HTTPTemplates;
 import fr.fjdhj.rasmusic.utils.XMLUtil;
 import fr.fjdhj.rasmusic.webserv.HTTPMethod;
+import fr.fjdhj.rasmusic.webserv.HTTPMimeType;
 import fr.fjdhj.rasmusic.webserv.HTTPRequest;
 import fr.fjdhj.rasmusic.webserv.HTTPResponse;
 import fr.fjdhj.rasmusic.webserv.HTTPStatusCode;
@@ -83,6 +84,8 @@ public class Core {
 		switch(request) {
 		case "/radiolist":// 		/radiolist
 			reponse = HTTPTemplates.plainText(XMLUtil.loadRadioListAsXML());
+			reponse.addHeader("Content-Type", HTTPMimeType.xml.MIMEType);
+
 			break;
 		case "/selectRadio":// 		/selectRadio X
 			webRadio.selectByID(args[1]);
@@ -117,6 +120,8 @@ public class Core {
 			break;
 		case "/getname":
 			reponse = HTTPTemplates.plainText(webRadio.getName());
+			break;
+		case "/update":
 			break;
 		default:
 			reponse = HTTPTemplates.error400();

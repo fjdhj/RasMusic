@@ -1,26 +1,15 @@
 package fr.fjdhj.rasmusic.webserv;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.StringTokenizer;
 
 import fr.fjdhj.rasmusic.Core;
 import fr.fjdhj.rasmusic.RasMusic;
 import fr.fjdhj.rasmusic.utils.HTTPUtil;
-import fr.fjdhj.rasmusic.webserv.exception.Error404;
 
 public class Server{
 	

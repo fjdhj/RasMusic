@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import fr.fjdhj.rasmusic.utils.HTTPUtil;
+import fr.fjdhj.rasmusic.webserv.HTTPMimeType;
 import fr.fjdhj.rasmusic.webserv.HTTPResponse;
 import fr.fjdhj.rasmusic.webserv.HTTPStatusCode;
 
@@ -24,7 +25,7 @@ public class HTTPTemplates {
 	public static HTTPResponse plainText(String text) {
 		HTTPResponse response = new HTTPResponse(HTTPStatusCode.code200, null, null);
 		response.addHeader("Date", new Date().toString());
-		response.addHeader("Content-Type", "text/plain");
+		response.addHeader("Content-Type", HTTPMimeType.text.MIMEType);
 		response.setBody(text.getBytes());
 		return response;
 	}
