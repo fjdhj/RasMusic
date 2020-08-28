@@ -19,6 +19,7 @@ import java.util.StringTokenizer;
 
 import fr.fjdhj.rasmusic.Core;
 import fr.fjdhj.rasmusic.RasMusic;
+import fr.fjdhj.rasmusic.utils.HTTPUtil;
 import fr.fjdhj.rasmusic.webserv.exception.Error404;
 
 public class Server{
@@ -26,8 +27,6 @@ public class Server{
 	private ServerSocket server;
 	
 	private BufferedReader in = null;
-	private PrintWriter out = null;
-	private BufferedOutputStream dataOut = null;
 	private Socket client;
 	
 	private final Core core;
@@ -65,67 +64,10 @@ public class Server{
 						while(!(line=in.readLine()).isEmpty()) {
 							headers.add(line);
 						}
-
 						
-						StringTokenizer parse = new StringTokenizer(headers.get(0));
-						String methods = parse.nextToken().toUpperCase(); //On récupère la méthode HTTP du client
-						//On récupère le fichier demandé
-						fileRequested= URLDecoder.decode(parse.nextToken(),StandardCharsets.UTF_8);
-						
-						//Le serveur ne supporte que les methods GET et HEAD, on verifie :
-						if(methods.equals("GET") || methods.equals("HEAD")) {
-							
-							File file;
-							String MIMEtype;
-							int fileLength;
-							
-							//Une requetes a l'API
-							if(fileRequested.contains("/api/")) {
-								//On envoie la commande
-								String commande = fileRequested.substring(fileRequested.lastIndexOf("/"));
-								String[] args = commande.split("-");
-								String resp = core.execRequest(args);
-								byte[] data = resp.getBytes();
-								GET_HEADmethod("200 OK", "text/plain", data.length, true, data);
-							}else{
-								//Une demande de fichier
-								if(fileRequested.equals("/")) {	
-									//On envoie l'index
-									file = new File(root + "index.html");
-								}else {
-									if(fileRequested.startsWith("/"))
-										file = new File(root + fileRequested.substring(1));
-									else
-										file = new File(root + fileRequested);
-								}
-								
-								if(file.exists()) {
-									GET_HEADmethod("200 OK", file);
-
-								}else {
-									GET_HEADmethod(new Error404(fileRequested).getErrorCode(), "", 0, false, null);
-									System.err.println("404 Error " + fileRequested);
-								}
-							}
-							
-						}else if(methods.equals("POST")) {
-							int len = 1;
-							for(String l : headers) 
-								if(l.contains("Content-Length:"))
-									len = Integer.parseInt(l.substring(l.lastIndexOf(":")+2));
-							
-							BufferedInputStream dataIn = new BufferedInputStream(client.getInputStream());
-							System.out.println(len);
-							byte[] buf = new byte[len];
-							System.out.println("ok");
-							System.out.println(dataIn.available());
-							dataIn.read(buf);
-							System.out.println("...");
-							System.out.println(buf);
-							System.out.print(new String(buf));
-							
-							System.out.println("ok2");
-						}
+						HTTPRequest request = HTTPUtil.parseRequest(headers, null);
+						HTTPResponse reponse = core.handleRequest(request);
+						HTTPUtil.sendHTTPResponse(reponse, client.getOutputStream());
 						
 					} catch (IOException e) {
 							e.printStackTrace();
@@ -148,7 +90,7 @@ public class Server{
 		servMain.setName("servMain");
 		servMain.start();
 	}
-	
+	/*
 	private boolean GET_HEADmethod(String HTTPstatus, String MIMEtype, int len, boolean body, byte[] bodyContent) throws IOException {
 		try {
 			//On ouvres les flux d'ecriture
@@ -188,42 +130,11 @@ public class Server{
 			System.out.println(client.getInetAddress() +" need "+ file);
 			System.out.println("Methods : GET_HEAD\n");
 			
-			String MIMEtype = MIMEtype(file.toString());
+			String MIMEtype = HTTPUtil.MIMEtype(file.toString());
 			int len = (int) file.length();
 			
-			byte[] data = readFileData(file);
+			byte[] data = HTTPUtil.readFileData(file);
 			
 			return GET_HEADmethod(HTTPstatus, MIMEtype, len, true, data);
-	}
-	
-	private byte[]readFileData(File file) throws IOException, FileNotFoundException{
-		FileInputStream fileIn = null;
-		byte[] data = new byte[(int) file.length()];
-			fileIn = new FileInputStream(file);
-			fileIn.read(data);
-			if(fileIn != null)
-				try {
-					fileIn.close();
-				} catch (IOException e) {e.printStackTrace();}
-		
-		
-		return data;
-		
-	}
-	
-	//Renvoie le type MIME du fichier (text, vidéo, image, ...)
-	private String MIMEtype(String fileRequested) {
-		switch(fileRequested.substring(fileRequested.lastIndexOf("."))) {
-		case ".html":
-			return "text/html";
-		case ".css":
-			return "text/css";
-		case ".js":
-			return "text/javascript";
-		case ".svg":
-			return "image/svg+xml";
-		default:
-			return "text/plain";
-		}
-	}
+	}*/
 }

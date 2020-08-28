@@ -47,7 +47,7 @@ public class HTTPResponse extends HTTPMessage{
 			}
 		});
 		String message = "HTTP/1.1 "+statusName + "\r\n"
-					   + headersString + "\r\n\r\n";
+					   + headersString + "\r\n";
 		byte[] head = message.getBytes(); 
 		if(body == null || body.length==0) {
 			return head;
@@ -57,7 +57,7 @@ public class HTTPResponse extends HTTPMessage{
 			byte[] sum = new byte[bodylen + headlen];
 			
 			System.arraycopy(head, 0, sum, 0, headlen);
-			System.arraycopy(bodylen, 0, sum, headlen, bodylen);
+			System.arraycopy(body, 0, sum, headlen, bodylen);
 			return sum;
 		}
 
