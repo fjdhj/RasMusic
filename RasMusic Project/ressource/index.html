@@ -8,26 +8,26 @@
 
 <title>RasMus</title>
 <link rel="stylesheet" href="style.css">
-
 <script src="script.js"></script> 
-
+       
+                                                                                                                                                                                                                                                                                                                                                                      
 </head>
 <body>
 	<div class="root" style="grid-auto-flow: row;">
 		<div id="Test" class="module" width="300" height="300">
 			<img class="radio" id="radioImage" src="noimage.svg" ><br>
-			<b id=radioName></b><br>
+			<b id=radioName style="color: white;"></b><br>
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="prev()"><img class="radio" src="prev.svg"></button>
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="play()"><img class="radio" id="playpauseimg" src="play.svg"></button>
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="next()"><img class="radio" src="next.svg"></button>
 		</div>
-        <div>
-            <ul class="sous">
-                <li><a href="#">test1</a></li>
-                <li>test2</li>
-                <li>test3</li>
-            </ul>
+        <div class="litmodule" style="padding-bottom: 18px; padding-top: 18px;"width="30" height="300">
+            <button class="radioSelec" onClick="getRadioList()" >List Radio</button>
+            <div id="radioList"></div>
+            <button class="radioSelec" >List fichier musique</button>
+            <button class="radioSelec" >Bouton pour le moment inutile</button>
         </div>
 	</div>
 </body>
+
 </html> 

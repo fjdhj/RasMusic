@@ -31,7 +31,7 @@ function next(){
 	
 }
 
-function selectRadio(var radioName){
+function selectRadio(radioName){
 var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("HEAD",ip+"/api/selectRadio-radioName");
 	xmlHttp.send(null);
@@ -59,6 +59,25 @@ function play(){
 
 function processRadioList(){
 
+}
+
+function getRadioList(){
+	var radioList = new XMLHttpRequest();
+	radioList.addEventListener('readystatechange', function(){
+		if (radioList.readyState === XMLHttpRequest.DONE && radioList.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
+        	console.log(radioList);
+			var radio = radioList.responseXML.getElementsByTagName('radio');
+			document.getElementById("radioList").innerHTML = '<select class="radioList">';
+			var i;
+			for(i = 0; i < radio.length; i++){
+				document.getElementById("radioList").innerHTML += ' <option value="'+radio[i].childNodes[0]+'">'+radio[i].childNodes[0]+'</option>';
+			}
+			document.getElementById("radioList").innerHTML = '</select>';
+   		}
+	});
+	radioList.open("GET", ip+"/api/radiolist");
+	radioList.send(null);
+	
 }
 
 updateRadio();

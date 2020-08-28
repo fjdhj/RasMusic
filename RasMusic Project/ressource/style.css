@@ -2,17 +2,7 @@ body{
 	background-color:   #333333;	
 }
 
-div.module{
-	background-color: #1a1a1a;
-	border-radius: 15px;
-	width: 100%;
-	min-width: 400px;
-	max-width: 500px;
-	text-align: center;
-    padding: 20px 0;
-    font-size: 30px;
-}
-
+/*Style pour le conteneur root, pour faire la grille*/
 div.root{
   display: grid;
   grid-template-columns: auto auto auto;
@@ -22,6 +12,33 @@ div.root{
 	
 }
 
+/*Style pour chaque carré*/
+div.module{
+	background-color: #1a1a1a;
+	border-radius: 15px;
+	width: 100%;
+	min-width: 400px;
+	max-width: 500px;
+	text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+/*Style pour chaque petit carré*/
+div.litmodule{
+	background-color: #1a1a1a;
+	border-radius: 15px;
+	width: 100%;
+	min-width: 200px;
+	max-width: 250px;
+	text-align: center;
+  font-size: 30px;
+}
+
+/*--------------------------------------------------------
+Module Radio
+---------------------------------------------------------*/
+
 img.radio{
 	width: 100%;
 	min-width: 35px;
@@ -29,6 +46,25 @@ img.radio{
 	
 }
 
+/*--------------------------------------------------------
+Module Selection Radio
+---------------------------------------------------------*/
+
+button.radioSelec{
+	height: 30px;
+	width: 100%;
+	border-radius: 0;
+	border: 0;
+	color: white;
+	display: block;
+	background-color: #262626;
+}
+
+button.radioSelec:hover{
+	background-color: #4d4d4d;
+}
+
+/*Pour des bouton invisible*/
 .invisible{
 	background-color:   #1a1a1a;
 	border: 0;
@@ -40,9 +76,3 @@ img.radio{
 }
 
 
-
-
-/*POUR UN MENU DEROULANT*/
-.sous{
-	
-}
