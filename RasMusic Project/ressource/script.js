@@ -33,10 +33,10 @@ function next(){
 
 function selectRadio(radioName){
 var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("HEAD",ip+"/api/selectRadio-radioName");
+    xmlHttp.open("HEAD",ip+"/api/selectRadio-"+radioName);
 	xmlHttp.send(null);
 	isPlaying = 1;
-    console.log("REQUETE HEAD à " + ip+"/api/selectRadio-radioName");
+    console.log("REQUETE HEAD à " + ip+"/api/selectRadio-"+radioName);
 	updateRadio();
 }
 
@@ -71,14 +71,20 @@ function getRadioList(){
 			var radio = XMLdocument.getElementsByTagName('radio');
 			var list = "";
 			
-			list += '<select class="radioList" size=3>';
+			list += '<ul class="radioList" padding-left="0">';
 			var i;
 			for(i = 0; i < radio.length; i++){
-				list += ' <option class="radioList" value="'+radio[i].getAttribute("name")+'">'+'<img src="'+radio[i].getAttribute("icon")+'"></img>'+radio[i].getAttribute("name")+'</option>';
+				var name = radio[i].getAttribute("name");
+				console.log(name);
+				list += ' <div class="radioElement" value="'+name+'" >'+'<img src="'+radio[i].getAttribute("icon")+'" width="50" height="50"></img>'+radio[i].getAttribute("name")+'</div>';
 			}
-			list += '</select>';
-			console.log(list);
+			list += '</ul>';
 			document.getElementById("radioList").innerHTML = list;
+			
+			var elements = document.getElementsByClassName('radioElement');
+			Array.prototype.forEach.call(elements,function(element){
+				element.addEventListener('click',selectRadio(element.getAttribute("name")));
+			});
    		}
 	});
 	radioList.open("GET", ip+"/api/radiolist");

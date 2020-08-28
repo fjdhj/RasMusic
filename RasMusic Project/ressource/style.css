@@ -64,12 +64,22 @@ button.radioSelec:hover{
 	background-color: #4d4d4d;
 }
 
-option.radioList{
-	background-color: grey;
-		color: black;
+button.radioSelec-child{
+
 }
-option.radioList:hover{
-	background-color: blue;
+
+.radioElement{
+	background-color: black;
+	font-size : 13px;
+	color : white;
+	width : 95%;
+	margin-top: 3px;
+	display: block;
+}
+
+.radioElement:hover{
+	background-color: #4d4d4d;
+	cursor: pointer;
 }
 
 /*Pour des bouton invisible*/
