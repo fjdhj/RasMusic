@@ -64,13 +64,14 @@ public class HTTPUtil {
 	 * */
 	public static HTTPMethod parseMethod(String code) {
 		HTTPMethod[] codes = HTTPMethod.values();
-		int i = 0;
-		HTTPMethod statusCode = codes[i];
-		while(i <codes.length && !statusCode.message.equals(code)) {
-			statusCode = codes[i];
-			i++;
+
+		HTTPMethod statusCode = codes[0];
+		for(int i=1;i<codes.length;i++) {
+			if(codes[i].message.equals(code)) {
+				statusCode = codes[i];
+			}
 		}
-		if(i >= codes.length) statusCode =null;
+
 		return statusCode;
 
 	}
@@ -94,18 +95,22 @@ public class HTTPUtil {
 	 * Serialize the HTTPRequest object through the given outputStream 
 	 * */
 	public static void sendHTTPRequest(HTTPRequest request, OutputStream out) throws IOException {
-		BufferedOutputStream dataout = new BufferedOutputStream(out);
-		dataout.write(request.getRequestAsByteArray());
-		dataout.flush();
+		if(request != null && out != null) {
+			BufferedOutputStream dataout = new BufferedOutputStream(out);
+			dataout.write(request.getRequestAsByteArray());
+			dataout.flush();
+		}
 	}
 	
 	/*
 	 * Serialize the HTTPResponse object through the given outputStream 
 	 * */
 	public static void sendHTTPResponse(HTTPResponse response, OutputStream out) throws IOException {
-		BufferedOutputStream dataout = new BufferedOutputStream(out);
-		dataout.write(response.getRequestAsByteArray());
-		dataout.flush();
+		if(response != null && out != null) {
+			BufferedOutputStream dataout = new BufferedOutputStream(out);
+			dataout.write(response.getRequestAsByteArray());
+			dataout.flush();
+		}
 	}
 	
 	//Copié depuis Server.java from fjdhj

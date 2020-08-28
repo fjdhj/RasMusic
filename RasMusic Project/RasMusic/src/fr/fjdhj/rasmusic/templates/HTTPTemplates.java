@@ -46,4 +46,14 @@ public class HTTPTemplates {
 		}
 		return response;
 	}
+
+	public static HTTPResponse ok200() {
+		HTTPResponse response = new HTTPResponse(HTTPStatusCode.code200, null, null);
+		return response;
+	}
+
+	public static HTTPResponse error500() {
+		HTTPResponse response = new HTTPResponse(HTTPStatusCode.code500, null, null);
+		return response;
+	}
 }
