@@ -38,7 +38,7 @@ public class HTTPUtil {
 				StringTokenizer parse = new StringTokenizer(line);
 				method = parse.nextToken().toUpperCase(); 
 				try {
-					requestURI= URLDecoder.decode(parse.nextToken().toLowerCase(),Charsets.UTF_8.name());
+					requestURI= URLDecoder.decode(parse.nextToken(),Charsets.UTF_8.name());
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}

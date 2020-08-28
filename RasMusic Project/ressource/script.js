@@ -83,7 +83,7 @@ function getRadioList(){
 			
 			var elements = document.getElementsByClassName('radioElement');
 			Array.prototype.forEach.call(elements,function(element){
-				element.addEventListener('click',selectRadio(element.getAttribute("name")));
+				element.setAttribute("onclick","selectRadio('"+element.getAttribute("value")+"');");
 			});
    		}
 	});
