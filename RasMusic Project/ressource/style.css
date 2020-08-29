@@ -64,8 +64,9 @@ button.radioSelec:hover{
 	background-color: #4d4d4d;
 }
 
-button.radioSelec-child{
-
+.radioList{
+	overflow-y: scroll;
+	height: 300px;
 }
 
 .radioElement{

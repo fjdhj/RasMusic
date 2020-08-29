@@ -82,6 +82,9 @@ public class Core {
 		}
 		System.out.println("REQUETE :" +  debug);
 		switch(request) {
+		case "/isplaying":
+			reponse = HTTPTemplates.plainText(String.valueOf(player.isPlaying()));
+			break;
 		case "/radiolist":// 		/radiolist
 			reponse = HTTPTemplates.plainText(XMLUtil.loadRadioListAsXML());
 			reponse.addHeader("Content-Type", HTTPMimeType.xml.MIMEType);

@@ -20,40 +20,53 @@ function updateRadio(){
     });
 	imgReq.open("GET", ip+"/api/getimage");
 	imgReq.send(null);
+	
+	var stateReq = new XMLHttpRequest();
+	stateReq.addEventListener('readystatechange', function() {
+    	if (stateReq.readyState === XMLHttpRequest.DONE && stateReq.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
+        	if(stateReq.responseText=="true"){
+        		setPlayingState();
+        	}else{
+        		setPauseState();
+        	}
+    	}	
+    });
+	stateReq.open("GET", ip+"/api/isplaying");
+	stateReq.send(null);
 
 }
 
-function prev(){
-	
+function setPlayingState(){
+	    isPlaying = 1;
+    	document.getElementById("playpauseimg").src="pause.svg";
 }
 
-function next(){
-	
+function setPauseState(){
+     	document.getElementById("playpauseimg").src="play.svg";
+		isPlaying=0;
 }
 
 function selectRadio(radioName){
 var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("HEAD",ip+"/api/selectRadio-"+radioName);
 	xmlHttp.send(null);
-	isPlaying = 1;
     console.log("REQUETE HEAD à " + ip+"/api/selectRadio-"+radioName);
+	play();
 	updateRadio();
 }
 
 function play(){
     var xmlHttp = new XMLHttpRequest();
     if(isPlaying == 0){
-    	document.getElementById("playpauseimg").src="pause.svg"
     	xmlHttp.open("HEAD",ip+"/api/play");
     	xmlHttp.send(null);
-    	isPlaying = 1;
 	    console.log("REQUETE GET à " + ip+"/api/play");
+		setPlayingState();
     }else{
-     	document.getElementById("playpauseimg").src="play.svg"
     	xmlHttp.open("HEAD",ip+"/api/pause");
     	xmlHttp.send(null);
-    	isPlaying = 0;
 	    console.log("REQUETE GET à " + ip+"/api/pause");
+	    setPauseState();
     }
 }
 

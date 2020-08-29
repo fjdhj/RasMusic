@@ -58,7 +58,7 @@ public class Server{
 						HTTPResponse reponse = core.handleRequest(request);
 						HTTPUtil.sendHTTPResponse(reponse, client.getOutputStream());
 						
-					} catch (IOException e) {
+					} catch (Exception e) {
 							e.printStackTrace();
 						}finally {
 						try {
@@ -79,51 +79,4 @@ public class Server{
 		servMain.setName("servMain");
 		servMain.start();
 	}
-	/*
-	private boolean GET_HEADmethod(String HTTPstatus, String MIMEtype, int len, boolean body, byte[] bodyContent) throws IOException {
-		try {
-			//On ouvres les flux d'ecriture
-			out = new PrintWriter(client.getOutputStream());
-			dataOut = new BufferedOutputStream(client.getOutputStream());
-		
-			out.println("HTTP/1.1 "+HTTPstatus);
-			out.println("Server: Java HTTP server for RasMus");
-			out.println("Date: " + new Date());
-			//On regarde si on a un fichier a envoyer
-			if(body) {
-				out.println("Content-type: "+MIMEtype);
-				out.println("Content-lenght: "+len);
-			}
-			
-			out.println();
-			out.flush();
-		
-			if(body) {
-				dataOut.write(bodyContent, 0, len);
-				dataOut.flush();
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}finally {
-			out.close();
-			dataOut.close();
-		}
-		return true;
-		
-	}
-	
-	private boolean GET_HEADmethod(String HTTPstatus, File file) throws IOException {
-			
-			System.out.println(client.getInetAddress() +" need "+ file);
-			System.out.println("Methods : GET_HEAD\n");
-			
-			String MIMEtype = HTTPUtil.MIMEtype(file.toString());
-			int len = (int) file.length();
-			
-			byte[] data = HTTPUtil.readFileData(file);
-			
-			return GET_HEADmethod(HTTPstatus, MIMEtype, len, true, data);
-	}*/
 }
