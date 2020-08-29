@@ -52,7 +52,6 @@ var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("HEAD",ip+"/api/selectRadio-"+radioName);
 	xmlHttp.send(null);
     console.log("REQUETE HEAD à " + ip+"/api/selectRadio-"+radioName);
-	play();
 	updateRadio();
 }
 

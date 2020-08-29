@@ -92,8 +92,17 @@ public class Core {
 			break;
 		case "/selectRadio":// 		/selectRadio X
 			webRadio.selectByID(args[1]);
+			boolean wasplaying = player.isPlaying();
 			player.stop();
 			player = new PlayerModule(webRadio.getURL());
+			if(wasplaying) {
+				try {
+					player.play();
+				} catch (StreamPlayerException e) {
+					reponse = HTTPTemplates.error500();
+					e.printStackTrace();
+				}
+			}
 			reponse = HTTPTemplates.ok200();
 			break;
 		case "/play" ://	 /play
@@ -123,8 +132,6 @@ public class Core {
 			break;
 		case "/getname":
 			reponse = HTTPTemplates.plainText(webRadio.getName());
-			break;
-		case "/update":
 			break;
 		default:
 			reponse = HTTPTemplates.error400();
