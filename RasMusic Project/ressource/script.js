@@ -76,8 +76,9 @@ function processRadioList(){
 }
 
 function getRadioList(){
+	var conteneur = document.getElementById("radioList");
 	if(isRadioListing){
-		document.getElementById("radioList").innerHTML = "";
+		conteneur.style.height = "0";
 		isRadioListing = false;
 	}else{
 		var radioList = new XMLHttpRequest();
@@ -103,6 +104,7 @@ function getRadioList(){
 				Array.prototype.forEach.call(elements,function(element){
 					element.setAttribute("onclick","selectRadio('"+element.getAttribute("value")+"');");
 				});
+				conteneur.style.height = "300px";
 	   		}
 		});
 		radioList.open("GET", ip+"/api/radiolist");
