@@ -50,6 +50,11 @@ img.radio{
 Module Selection Radio
 ---------------------------------------------------------*/
 
+.radioList{
+	padding: 0;
+	margin : 0;
+}
+
 button.radioSelec{
 	height: 30px;
 	width: 100%;
@@ -72,14 +77,19 @@ button.radioSelec-child{
 	background-color: black;
 	font-size : 13px;
 	color : white;
-	width : 95%;
+	width : 100%;
 	margin-top: 3px;
 	display: block;
+	text-align: left;
 }
 
 .radioElement:hover{
 	background-color: #4d4d4d;
 	cursor: pointer;
+}
+
+.radioElementImage{
+	max-height: 50px;
 }
 
 /*Pour des bouton invisible*/

@@ -18,7 +18,7 @@
 	<radio name="Rire et Chansons" URL="http://cdn.nrjaudio.fm/audio1/fr/30401/mp3_128.mp3?" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/c/cd/Rire_%26_Chansons_logo_2012.png/130px-Rire_%26_Chansons_logo_2012.png"></radio>
 	<radio name="RMC" URL="http://rmc.bfmtv.com/rmcinfo-mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Logo_RMC_2002.svg/langfr-170px-Logo_RMC_2002.svg.png"></radio>
 	<radio name="RTL" URL="http://streaming.radio.rtl.fr/rtl-1-48-192" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/RTL_logo.svg/langfr-180px-RTL_logo.svg.png"></radio>
-	<radio name="RTL2" URL="http://streaming.radio.rtl2.fr/rtl2-1-48-192" icon="null"></radio>
+	<radio name="RTL2" URL="http://streaming.radio.rtl2.fr/rtl2-1-48-192" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/f/fa/RTL2_logo_2015.svg/800px-RTL2_logo_2015.svg.png"></radio>
 	<radio name="Skyrock" URL="http://icecast.skyrock.net/s/natio_mp3_128k" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/5/57/Logo_Skyrock_2011.svg/langfr-220px-Logo_Skyrock_2011.svg.png"></radio>
 	<radio name="Virgin Radio" URL="http://ais-live.cloud-services.paris:8000/virgin.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Virgin_radio_fr.png/110px-Virgin_radio_fr.png"></radio>
 	<radio name="TSF Jazz" URL="http://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/TSFJazz-2017.jpg/150px-TSFJazz-2017.jpg"></radio>
