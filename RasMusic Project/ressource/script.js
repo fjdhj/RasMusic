@@ -49,10 +49,14 @@ function setPauseState(){
 
 function selectRadio(radioName){
 var xmlHttp = new XMLHttpRequest();
+	xmlHttp.addEventListener('readystatechange', function() {
+			if (xmlHttp.readyState === XMLHttpRequest.DONE && xmlHttp.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
+				updateRadio();
+	   		}
+		});
     xmlHttp.open("HEAD",ip+"/api/selectRadio-"+radioName);
 	xmlHttp.send(null);
     console.log("REQUETE HEAD à " + ip+"/api/selectRadio-"+radioName);
-	updateRadio();
 }
 
 function play(){
