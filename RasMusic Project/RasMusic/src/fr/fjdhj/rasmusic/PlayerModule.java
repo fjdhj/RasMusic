@@ -1,10 +1,8 @@
 package fr.fjdhj.rasmusic;
 
-import java.io.DataInputStream;
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Map;
 
 import com.goxr3plus.streamplayer.stream.StreamPlayer;
@@ -20,11 +18,10 @@ public class PlayerModule extends StreamPlayer implements StreamPlayerListener{
 	public PlayerModule(URL defaultURL) {
 		streamURL = defaultURL;
 		this.addStreamPlayerListener(this);
-		URLConnection uc;
+		BufferedInputStream uc;
 		try {
-			uc = streamURL.openConnection();
-			DataInputStream in = new DataInputStream(uc.getInputStream());
-			open(in);
+			uc = new BufferedInputStream(streamURL.openStream());
+			open(uc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (StreamPlayerException e) {

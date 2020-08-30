@@ -12,7 +12,7 @@ div.root{
 	
 }
 
-/*Style pour chaque carrÃ©*/
+/*Style pour chaque carré*/
 div.module{
 	background-color: #1a1a1a;
 	border-radius: 15px;
@@ -20,11 +20,13 @@ div.module{
 	min-width: 400px;
 	max-width: 500px;
 	text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+  	padding: 20px 0;
+  	font-size: 30px;
+  	float:left;
+  	display: inline-block;
 }
 
-/*Style pour chaque petit carrÃ©*/
+/*Style pour chaque petit carré*/
 div.litmodule{
 	background-color: #1a1a1a;
 	border-radius: 15px;
@@ -32,7 +34,9 @@ div.litmodule{
 	min-width: 200px;
 	max-width: 250px;
 	text-align: center;
-  font-size: 30px;
+  	font-size: 30px;
+  	float:left;
+  	display: inline-block;
 }
 
 /*--------------------------------------------------------
@@ -64,12 +68,41 @@ button.radioSelec:hover{
 	background-color: #4d4d4d;
 }
 
-option.radioList{
-	background-color: grey;
-		color: black;
+.radioList{
+	overflow-y: scroll;
+	padding: 0;
+	margin : 0;
 }
-option.radioList:hover{
-	background-color: blue;
+
+.radioElement{
+	background-color: black;
+	font-size : 13px;
+	color : white;
+	width : 100%;
+	margin-top: 3px;
+	display: block;
+	text-align: left;
+}
+
+.radioElement:hover{
+	background-color: #4d4d4d;
+	cursor: pointer;
+}
+
+.radioElementImage{
+	max-height: 50px;
+}
+
+.horloge{
+	width : 100%;
+	height: 100%;
+	font-size: 80px;
+	color : #56a2b3;
+	font-family:Impact, Charcoal, sans-serif;
+  	display: flex;
+    justify-content: center;
+    align-items: center;
+	
 }
 
 /*Pour des bouton invisible*/
