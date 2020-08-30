@@ -93,14 +93,12 @@ function getRadioList(){
 				var radio = XMLdocument.getElementsByTagName('radio');
 				var list = "";
 				
-				list += '<ul class="radioList" padding-left="0">';
 				var i;
 				for(i = 0; i < radio.length; i++){
 					var name = radio[i].getAttribute("name");
 					console.log(name);
 					list += ' <div class="radioElement" value="'+name+'" >'+'<img src="'+radio[i].getAttribute("icon")+'" class="radioElementImage"></img><b>'+radio[i].getAttribute("name")+'</b></div>';
 				}
-				list += '</ul>';
 				document.getElementById("radioList").innerHTML = list;
 				
 				var elements = document.getElementsByClassName('radioElement');
