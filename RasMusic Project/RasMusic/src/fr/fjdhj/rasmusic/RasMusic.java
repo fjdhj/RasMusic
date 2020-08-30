@@ -1,7 +1,7 @@
 package fr.fjdhj.rasmusic;
 
+import fr.fjdhj.rasmusic.module.alarmClock.Clock;
 import fr.fjdhj.rasmusic.webserv.Server;
-import fr.fjdhj.rasmusic.Core;
 
 public class RasMusic {
 	
@@ -15,8 +15,8 @@ public class RasMusic {
 		Server serv = new Server(core);  		
 		//Test API Apple music
 		/*AppleMusicUser user = new AppleMusicUser();
-		user.login();*/
-		
+		user.login();*/		
+		Clock c = new Clock();
 		
 	}
 
