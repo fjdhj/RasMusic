@@ -1,18 +1,23 @@
 package fr.fjdhj.rasmusic;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
+import com.google.common.io.Files;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 
 import fr.fjdhj.rasmusic.module.radio.SongManager;
 import fr.fjdhj.rasmusic.templates.HTTPTemplates;
+import fr.fjdhj.rasmusic.utils.HTTPUtil;
 import fr.fjdhj.rasmusic.utils.XMLUtil;
-import fr.fjdhj.rasmusic.webserv.HTTPMethod;
 import fr.fjdhj.rasmusic.webserv.HTTPMimeType;
 import fr.fjdhj.rasmusic.webserv.HTTPRequest;
 import fr.fjdhj.rasmusic.webserv.HTTPResponse;
-import fr.fjdhj.rasmusic.webserv.HTTPStatusCode;
-import fr.fjdhj.rasmusic.webserv.exception.Error404;
 
 public class Core {
 
@@ -35,9 +40,7 @@ public class Core {
 			String fileRequested = request.getRequestUri();
 			if(fileRequested.contains("/api/")) {
 				//On envoie la commande
-				String commande = fileRequested.substring(fileRequested.lastIndexOf("/"));
-				String[] args = commande.split("-");
-				response = execRequest(args);
+				response = execRequest(request);
 			}else{
 				File file;
 				//Une demande de fichier
@@ -61,10 +64,10 @@ public class Core {
 			}
 			break;
 		case POST:
-			response = HTTPTemplates.error404();
+			response = post(request);
 			break;
 		case PUT:
-			response = HTTPTemplates.error404();
+			response = put(request);
 			break;
 		default:
 			response = HTTPTemplates.error400();
@@ -73,15 +76,77 @@ public class Core {
 		return response;
 	}
 	
-	public HTTPResponse execRequest(String[] args) {
+	private HTTPResponse post(HTTPRequest request) {
+		String URI = request.getRequestUri();
+		File file = new File(root + URI);
+		String rawMIME = request.getHeaderValue("Content-Type");
+		if(rawMIME == null) {return HTTPTemplates.error400();}
+		HTTPMimeType mime = HTTPUtil.parseMimeType(rawMIME);
+			switch(mime) {
+			case jar:
+				break;
+			case text:
+				break;
+			case xml:
+				System.out.println(file.getAbsolutePath() + " exists= " + file.exists());
+				System.out.println("Request body length : " + request.getContentLength());
+				if(file.exists()) {
+					
+					File temp = new File(file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("."))+".temp");
+					PrintWriter writer = null;
+					BufferedReader reader = null;
+					try {
+						writer = new PrintWriter(temp);
+						reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+						String line="";
+						while((line=reader.readLine())!=null) {
+							String nextLine = reader.readLine();
+							if(nextLine==null && line !=null) {
+								writer.println(new String(request.getBody()));
+								writer.println(line);
+							}else {
+								writer.println(line);
+								writer.println(nextLine);
+							}
+						}
+						Files.move(temp, file);
+					
+					} catch (IOException e) {
+						e.printStackTrace();
+					}finally {
+						writer.close();
+						try {
+							reader.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}else {
+					return HTTPTemplates.error400();
+				}
+				break;
+			default:
+				return HTTPTemplates.error400();
+			}
+		return null;
+	}
+	
+	private HTTPResponse put(HTTPRequest request) {
+		
+		return null;
+	}
+
+	public HTTPResponse execRequest(HTTPRequest request) {
 		HTTPResponse reponse = null;
+		String requestURI = request.getRequestUri();
+		String[] args = requestURI.substring(requestURI.lastIndexOf("/")).split("-");
 		String debug = "";
-		String request = args[0];
+		String endpoint = args[0];
 		for(String arg : args) {
 			debug+= "  ||  "+arg;
 		}
 		System.out.println("REQUETE :" +  debug);
-		switch(request) {
+		switch(endpoint) {
 		case "/isplaying":
 			reponse = HTTPTemplates.plainText(String.valueOf(player.isPlaying()));
 			break;

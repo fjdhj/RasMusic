@@ -1,5 +1,6 @@
 package fr.fjdhj.rasmusic.webserv;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,13 +10,14 @@ import java.util.ArrayList;
 
 import fr.fjdhj.rasmusic.Core;
 import fr.fjdhj.rasmusic.RasMusic;
+import fr.fjdhj.rasmusic.templates.HTTPTemplates;
 import fr.fjdhj.rasmusic.utils.HTTPUtil;
 
 public class Server{
 	
 	private ServerSocket server;
 	
-	private BufferedReader in = null;
+	BufferedInputStream in;
 	private Socket client;
 	
 	private final Core core;
@@ -42,20 +44,21 @@ public class Server{
 						client = server.accept();
 						System.out.println("Nouvelle connexion");
 						
-						//Quelq'un c'est connecté, on ouvre les flux d'écriture et de lecture
+						//Quelqu'un s'est connecté, on ouvre les flux d'écriture et de lecture
 				
-						//On ouvre le flux de lecture
-						in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-						
-						//On lit le flux et on parse la requetes
-						String line = "";
-						ArrayList<String> headers = new ArrayList<String>();
-						while(!(line=in.readLine()).isEmpty()) {
-							headers.add(line);
+						in = new BufferedInputStream(client.getInputStream());
+						HTTPRequest request = HTTPUtil.parseRequest(in);
+						//On traite la requete
+						HTTPResponse reponse;
+						if(request != null) {
+							reponse = core.handleRequest(request);
+						}else {
+							reponse = HTTPTemplates.error400();
 						}
-						
-						HTTPRequest request = HTTPUtil.parseRequest(headers, null);
-						HTTPResponse reponse = core.handleRequest(request);
+						//On corrige la réponse si besoin
+						if(reponse ==null) {
+							reponse = HTTPTemplates.error500();
+						}
 						HTTPUtil.sendHTTPResponse(reponse, client.getOutputStream());
 						
 					} catch (Exception e) {
@@ -64,7 +67,6 @@ public class Server{
 						try {
 							System.out.println("Fermeture des flux");
 							System.out.println("-----------------------------------");
-							in.close();
 							client.close();
 						} catch (IOException e) {e.printStackTrace();}
 						

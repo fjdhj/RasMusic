@@ -1,5 +1,6 @@
 package fr.fjdhj.rasmusic.utils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -60,7 +62,72 @@ public class HTTPUtil {
 			return new HTTPRequest(methodObj, requestURI, headers, body);
 		}
 	}
-	
+	/**
+	 * Parse the request to build a HTTPRequest object from a BufferedInputStream
+	 * @return null if the message can't be parsed
+	 * */
+	public static HTTPRequest parseRequest(BufferedInputStream inSource){
+		ArrayList<String> lines;
+		byte[] body = new byte[0];
+		
+		try {
+			int val;
+			int len = 0;
+			int bodyOffset = 0;
+			System.out.print("DATA = ");
+			StringBuilder builder = new StringBuilder();
+			byte[] charBuffer = new byte[1];
+			boolean continueReading = true;
+			boolean isBody = false;
+			while(continueReading  && (val= inSource.read(charBuffer))!= -1) {
+				if(isBody && body!=null) {
+					//Si on est ici c'est que le content-length existe et qu'il y a un body
+					//On lis donc autant que prévu.
+					//On peuple le body[] avec l'octet lu à chhaque itération.
+					System.out.println("Octet : " + bodyOffset + " val: " + new String(charBuffer) + " len: " + len);
+					body[bodyOffset] = charBuffer[0];
+					bodyOffset ++;
+					if(bodyOffset >= len) {
+						continueReading = false;
+					}
+				}else {
+					//On traite l'en tête
+					builder.append(new String(charBuffer));
+					if(builder.toString().contains("\r\n\r\n") && !isBody) {
+						System.out.println("----BODY----");
+						//S'execute une unique fois
+						isBody = true;
+						//On prépare la lecture de l'en tete;
+						String header = builder.toString();
+						int start = header.indexOf("Content-Length");
+						if(start!=-1) {
+							//Le content-length existe, on le récupère.
+							len = Integer.parseInt(header.substring(header.indexOf(":", start)+2, header.indexOf("\r\n", start)));
+							body = new byte[len];
+						}else {
+							//Il n'existe pas donc on ignore le body
+							continueReading = false;
+						}
+					}else {
+						System.out.print(new String(charBuffer));
+					}
+				}
+			}
+			//Si on arrive ici, on a lu l'en tete et on a un body vide ou non.
+			//On traite l'en tete pour le transformer ensuite.
+			String rawHeader = builder.toString();
+			String[] lineArray = rawHeader.split("\r\n");
+			lines = new ArrayList<String>();
+			for(String line : lineArray) {
+				lines.add(line);
+			}
+		} catch (Exception e) {
+			//La requete est malformée.
+			e.printStackTrace();
+			return null;
+		}
+		return parseRequest(lines, body);
+	}
 	/**
 	 * Parse the given method to build a HTTPMethod object
 	 * Example: "GET" into HTTPMetgod.get
