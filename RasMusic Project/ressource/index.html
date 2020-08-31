@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 <head>
 
@@ -27,7 +27,24 @@
             <button class="radioSelec" onClick="getRadioList()" >List Radio</button>
             <div id="radioList" class="radioList"></div>
             <button class="radioSelec" >List fichier musique</button>
-            <button class="radioSelec" >Bouton pour le moment inutile</button>
+            <button class="radioSelec" onClick="toggleRadioAdding()">Ajouter une radio</button>
+            <div class="radioAdding" id="radioAdding">
+					<div class="form">
+            			<label class="formText" for="name">Nom de la radio </label>
+    					<input type="text" name="name" id="nameInput" required>
+            		</div>
+            		<div class="form">
+            			<label class="formText" for="url">URL de la radio </label>
+    					<input type="url" name="url" id="urlInput" required>
+            		</div>
+    				<div class="form">
+            			<label class="formText" for="url">URL de l'icône </label>
+    					<input type="url" name="urlIcon" id="urlIconInput" required>
+            		</div>
+            		<div class="form">
+    					<input type="submit" value="Enregistrer" onclick="addRadio()">
+            		</div>
+            </div>
         </div>
 	</div>
 </body>

@@ -3,7 +3,6 @@ package fr.fjdhj.rasmusic;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -11,6 +10,7 @@ import java.io.PrintWriter;
 import com.google.common.io.Files;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 
+import fr.fjdhj.rasmusic.module.radio.Radio;
 import fr.fjdhj.rasmusic.module.radio.SongManager;
 import fr.fjdhj.rasmusic.templates.HTTPTemplates;
 import fr.fjdhj.rasmusic.utils.HTTPUtil;
@@ -88,31 +88,45 @@ public class Core {
 			case text:
 				break;
 			case xml:
+				/*TODO Refactor pour pouvoir supporter d'autre opérations (et nettoyer-optimiser tout ça)
+				*Pour la liste des radio, à voir si ajouter la radio dans le SongManager
+				*puis d'écrire la liste à partir du SongManager est plus pratique. On ne 
+				*devrait pas gerer d'IO ici. De plus cela empecherait tout doublon.
+				*Pour l'instant c'est sale mais ça fonctionne.
+				*Le serveur ne vérifie pas les données reçues donc si le client envoie n'importe 
+				*quoi, la base de donnée des radio est corrompue. 
+				*/
+				
 				System.out.println(file.getAbsolutePath() + " exists= " + file.exists());
 				System.out.println("Request body length : " + request.getContentLength());
 				if(file.exists()) {
-					
+					//On insere les données xml à l'avant dernière ligne.
 					File temp = new File(file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("."))+".temp");
 					PrintWriter writer = null;
 					BufferedReader reader = null;
 					try {
 						writer = new PrintWriter(temp);
 						reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-						String line="";
-						while((line=reader.readLine())!=null) {
-							String nextLine = reader.readLine();
-							if(nextLine==null && line !=null) {
+						String current="";
+						String lastline=reader.readLine();
+						while(lastline!=null) {
+							current=reader.readLine();
+							if(current == null && lastline !=null) {
 								writer.println(new String(request.getBody()));
-								writer.println(line);
-							}else {
-								writer.println(line);
-								writer.println(nextLine);
 							}
+							writer.println(lastline);
+							lastline = current;
 						}
 						Files.move(temp, file);
-					
 					} catch (IOException e) {
 						e.printStackTrace();
+						writer.close();
+						try {
+							reader.close();
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+						return HTTPTemplates.error400();
 					}finally {
 						writer.close();
 						try {
@@ -121,12 +135,11 @@ public class Core {
 							e.printStackTrace();
 						}
 					}
+					webRadio.setRadioList(XMLUtil.loadRadioList());
+					return HTTPTemplates.ok200();
 				}else {
 					return HTTPTemplates.error400();
 				}
-				break;
-			default:
-				return HTTPTemplates.error400();
 			}
 		return null;
 	}

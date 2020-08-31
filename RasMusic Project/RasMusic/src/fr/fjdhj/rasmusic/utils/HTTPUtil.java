@@ -83,8 +83,8 @@ public class HTTPUtil {
 				if(isBody && body!=null) {
 					//Si on est ici c'est que le content-length existe et qu'il y a un body
 					//On lis donc autant que prévu.
-					//On peuple le body[] avec l'octet lu à chhaque itération.
-					System.out.println("Octet : " + bodyOffset + " val: " + new String(charBuffer) + " len: " + len);
+					//On peuple le body[] avec l'octet lu à chaque itération.
+					//DEBUG System.out.println("Octet : " + bodyOffset + " val: " + new String(charBuffer) + " len: " + len);
 					body[bodyOffset] = charBuffer[0];
 					bodyOffset ++;
 					if(bodyOffset >= len) {

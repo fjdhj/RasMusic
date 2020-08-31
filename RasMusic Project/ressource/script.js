@@ -1,5 +1,6 @@
 var isPlaying = 0;
 var isRadioListing = false;
+var isRadioAdding = false;
 
 function updateRadio(){
 	//Get current radio
@@ -112,6 +113,31 @@ function getRadioList(){
 		radioList.send(null);
 		isRadioListing = true;
 	}
+}
+
+function toggleRadioAdding(){
+	var conteneur = document.getElementById("radioAdding");
+	if(isRadioAdding){
+		conteneur.style.display="none";
+		isRadioAdding = false;
+	}else{
+		conteneur.style.display="block";
+		isRadioAdding = true;
+	}
+}
+
+function addRadio(){
+	var nameInput = document.getElementById("nameInput");
+	var urlInput = document.getElementById("urlInput");
+	var urlIconInput = document.getElementById("urlIconInput");
+	//<radio name="France Bleu Auxerre" URL="http://direct.francebleu.fr/live/fbauxerre-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	
+	var data = '<radio name="'+ nameInput.value+ '" URL="'+urlInput.value+'" icon="'+urlIconInput.value+'"></radio>';
+	
+	var request = new XMLHttpRequest();
+	request.open("POST", "/radiolist/France.xml");
+	request.setRequestHeader("Content-Type","application/xml");
+	request.send(data);
 }
 
 function startTime() {
