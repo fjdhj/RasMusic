@@ -19,6 +19,7 @@
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="prev()"><img class="radio" src="prev.svg"></button>
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="play()"><img class="radio" id="playpauseimg" src="play.svg"></button>
 			<button width="40" height="40" class="invisible" id="playPause" type="button" onclick="next()"><img class="radio" src="next.svg"></button>
+			<input type="range" min="0" max="100" step="4" oninput="volume(this.value)" onchange="volume(this.value)">
 		</div>
 		<div class="module">
 			<div id="horloge" class="horloge"></div>

@@ -140,6 +140,13 @@ function addRadio(){
 	request.send(data);
 }
 
+function volume(value){
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("HEAD",ip+"/api/setvolume-"+value);
+    	xmlHttp.send(null);
+	    console.log("REQUETE GET à " + ip+"/api/setvolume-"+value);
+}
+
 function startTime() {
 	  var today = new Date();
 	  var h = today.getHours();

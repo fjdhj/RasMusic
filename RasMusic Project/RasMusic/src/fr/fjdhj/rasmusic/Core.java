@@ -211,6 +211,20 @@ public class Core {
 		case "/getname":
 			reponse = HTTPTemplates.plainText(webRadio.getName());
 			break;
+		case "/setvolume":
+			if(args.length>=2) {
+				String arg = args[1];
+				try {
+					System.out.println(((float)Math.min(Math.max(Integer.parseInt(arg), 0),100))/100);
+					player.setGain(((float)Math.min(Math.max(Integer.parseInt(arg), 0),100))/100);
+					reponse = HTTPTemplates.ok200();
+				}catch(NumberFormatException ex) {
+					reponse = HTTPTemplates.error400();
+				}
+			}else {
+				reponse = HTTPTemplates.error400();
+			}
+			break;
 		default:
 			reponse = HTTPTemplates.error400();
 			break;
