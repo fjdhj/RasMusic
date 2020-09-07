@@ -35,6 +35,7 @@ public class Clock {
 				for(Alarm a : alarm) {
 					if(a.getHour() == h && a.getMinut()== m) {
 						System.out.println("Time's up at "+ new Date());
+						
 					}
 				}
 				
