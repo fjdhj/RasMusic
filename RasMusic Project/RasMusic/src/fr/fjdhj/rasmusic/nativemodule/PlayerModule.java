@@ -1,4 +1,4 @@
-package fr.fjdhj.rasmusic;
+package fr.fjdhj.rasmusic.nativemodule;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -10,12 +10,17 @@ import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 
-public class PlayerModule extends StreamPlayer implements StreamPlayerListener{
+class PlayerModule extends StreamPlayer implements StreamPlayerListener{
 
 	private volatile Thread playerWorker;
 	private URL streamURL;
 		
-	public PlayerModule(URL defaultURL) {
+	PlayerModule() {
+		streamURL = null;
+		this.addStreamPlayerListener(this);
+	}
+	
+	PlayerModule(URL defaultURL) {
 		streamURL = defaultURL;
 		this.addStreamPlayerListener(this);
 		BufferedInputStream uc;
@@ -29,7 +34,7 @@ public class PlayerModule extends StreamPlayer implements StreamPlayerListener{
 		}
 	}
 	
-	public void setURL(URL url) {
+	void setURL(URL url) {
 		streamURL = url;
 	}
 	

@@ -1,19 +1,15 @@
-package fr.fjdhj.rasmusic.module.radio;
+package fr.fjdhj.RadioManager;
 
 import java.net.URL;
 import java.util.HashMap;
-
-import fr.fjdhj.rasmusic.PlayerModule;
 
 public class SongManager{
 	
 	private HashMap<String,Radio> radioList = new HashMap<String,Radio>();
 	
 	private Radio currentRadio;
-	private PlayerModule player;
 	
 	public SongManager(HashMap<String,Radio> liste) {
-		this.player = player;
 		radioList = liste;
 		currentRadio = radioList.get((String) radioList.keySet().toArray()[0]);
 	}

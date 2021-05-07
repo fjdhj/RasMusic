@@ -1,4 +1,4 @@
-package fr.fjdhj.rasmusic.module.radio;
+package fr.fjdhj.RadioManager;
 
 import java.net.URL;
 

@@ -1,9 +1,8 @@
-package fr.fjdhj.rasmusic.utils;
+package fr.fjdhj.RadioManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,10 +16,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import fr.fjdhj.rasmusic.module.radio.Radio;
+import fr.fjdhj.rasmusic.RasMusic;
 
 public class XMLUtil {
-	private static final String RADIOLIST_PATH = "ressource/radiolist/";
+	private static final String RADIOLIST_PATH = RasMusic.DATA_FOLDER_PATH+RadioManagerInterface.MODULE_NAME+"/radioList";
 	
 	public static HashMap<String,Radio> loadRadioList() {
 		HashMap<String,Radio> liste = new HashMap<String,Radio>();		
@@ -70,10 +69,6 @@ public class XMLUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(XMLUtil.loadRadioListAsXML());
 	}
 	
 	private static String processRadioFile(File file) {
@@ -131,4 +126,10 @@ public class XMLUtil {
 		content += "</root>";
 		return content;
 	}
+	
+	
+	
+	/*---------------------NEW VERSION-----------------------*/
+
+	
 }

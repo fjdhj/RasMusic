@@ -64,7 +64,7 @@ public class HTTPUtil {
 	/**
 	 * Parse the given method to build a HTTPMethod object
 	 * Example: "GET" into HTTPMetgod.get
-	 * @param a String representing the method
+	 * @param meth a String representing the method
 	 * @return a HTTPMethod object / null if the parsing fails
 	 */
 	

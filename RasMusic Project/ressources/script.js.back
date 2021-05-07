@@ -86,6 +86,7 @@ function getRadioList(){
 	}else{
 		var radioList = new XMLHttpRequest();
 		radioList.addEventListener('readystatechange', function(){
+			console.log(radioList.status);
 			if (radioList.readyState === XMLHttpRequest.DONE && radioList.status==200) { // La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
 	        	console.log(radioList);
 				var parser = new DOMParser();

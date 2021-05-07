@@ -35,10 +35,9 @@ public class Server{
 				try {
 					server = new ServerSocket(RasMusic.PORT_USE);
 				} catch (IOException e1) {e1.printStackTrace();}
+				System.out.println("Server start on port "+RasMusic.PORT_USE);
 				while(servRun){
 					try {
-						
-						
 						client = server.accept();
 						System.out.println("Nouvelle connexion");
 						
