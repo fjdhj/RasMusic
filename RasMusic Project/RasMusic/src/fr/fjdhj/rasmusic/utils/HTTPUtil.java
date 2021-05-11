@@ -8,11 +8,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
-
-import com.google.api.client.util.Charsets;
 
 import fr.fjdhj.rasmusic.webserv.HTTPMethod;
 import fr.fjdhj.rasmusic.webserv.HTTPMimeType;
@@ -37,11 +36,7 @@ public class HTTPUtil {
 			if(i==0) {
 				StringTokenizer parse = new StringTokenizer(line);
 				method = parse.nextToken().toUpperCase(); 
-				try {
-					requestURI= URLDecoder.decode(parse.nextToken(),Charsets.UTF_8.name());
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				requestURI= URLDecoder.decode(parse.nextToken(), Charset.forName("UTF-8"));
 			}else {
 				try {
 					String key = line.substring(0, line.lastIndexOf(":"));

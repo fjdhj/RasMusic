@@ -24,3 +24,6 @@ hs_err_pid*
 
 #Ignore build file
 /bin/
+
+#Build Module Folder
+!/RasMusic Module/Build/**

@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/theok/git/RasMusic/RasMusic Module/RasMusicModuleLib0.2.jar">
+	<classpathentry kind="lib" path="D:/UserData/theok/git/RasMusic/RasMusic Module/RasMusicModuleLib0.2.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/theok/git/RasMusic/RasMusic%20Project/doc.zip!/doc"/>
 			<attribute name="module" value="true"/>

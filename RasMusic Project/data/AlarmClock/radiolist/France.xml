@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<racine>
+	<radio name="Chérie FM" URL="http://cdn.nrjaudio.fm/audio1/fr/30201/mp3_128.mp3" icon="https://1.bp.blogspot.com/-egEnGI4uiaY/W_XFJJZAwHI/AAAAAAAAI_4/03O51ksNwRMulQQKKAs4FaSKa_vHDz1ngCKgBGAs/s400/Ch%25C3%25A9rie%2BFM%2B%253B%2B%2528001%2529.png"></radio>
+	<radio name="BFM Business" URL="http://chai5she.cdn.dvmr.fr/bfmbusiness" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/f/fb/BFM_Business_logo_2016.svg/512px-BFM_Business_logo_2016.svg.png"></radio>
+	<radio name="Europe 1" URL="http://ais-live.cloud-services.paris:8000/europe1.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Europe_1_logo_%282010%29.svg/langfr-1920px-Europe_1_logo_%282010%29.svg.png"></radio>
+	<radio name="France Bleu 107.1" URL="http://direct.francebleu.fr/live/fb1071-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	<radio name="France Bleu Alsace" URL="http://direct.francebleu.fr/live/fbalsace-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	<radio name="France Bleu Armorique" URL="http://direct.francebleu.fr/live/fbarmorique-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	<radio name="France Bleu Auxerre" URL="http://direct.francebleu.fr/live/fbauxerre-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	<radio name="France Bleu Azur" URL="http://direct.francebleu.fr/live/fbazur-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/9/98/France_Bleu_logo_2015.svg/langfr-130px-France_Bleu_logo_2015.svg.png"></radio>
+	<radio name="France Culture" URL="http://direct.franceculture.fr/live/franceculture-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c9/France_Culture_-_2008.svg/langfr-180px-France_Culture_-_2008.svg.png"></radio>
+	<radio name="France Info" URL="http://direct.franceinfo.fr/live/franceinfo-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Franceinfo.svg/langfr-220px-Franceinfo.svg.png"></radio>
+	<radio name="France Inter" URL="http://direct.franceinter.fr/live/franceinter-midfi.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/8/8d/France_inter_2005_logo.svg/langfr-130px-France_inter_2005_logo.svg.png"></radio>
+	<radio name="Fun Radio France" URL="http://streaming.radio.funradio.fr/fun-1-48-192" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/e/eb/Fun_Radio.png/220px-Fun_Radio.png"></radio>
+	<radio name="Jazz Radio" URL="http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/0/06/Jazz-radio.png/110px-Jazz-radio.png"></radio>
+	<radio name="NRJ France" URL="http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/c/ca/Nrj2014.png/220px-Nrj2014.png"></radio>
+	<radio name="RFM" URL="http://ais-live.cloud-services.paris:8000/rfm.mp3" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/1/19/RFM_logo_2011.png/130px-RFM_logo_2011.png"></radio>
+	<radio name="Rire et Chansons" URL="http://cdn.nrjaudio.fm/audio1/fr/30401/mp3_128.mp3?" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/c/cd/Rire_%26_Chansons_logo_2012.png/130px-Rire_%26_Chansons_logo_2012.png"></radio>
+	<radio name="RMC" URL="http://rmc.bfmtv.com/rmcinfo-mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Logo_RMC_2002.svg/langfr-170px-Logo_RMC_2002.svg.png"></radio>
+	<radio name="RTL" URL="http://streaming.radio.rtl.fr/rtl-1-48-192" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/RTL_logo.svg/langfr-180px-RTL_logo.svg.png"></radio>
+	<radio name="RTL2" URL="http://streaming.radio.rtl2.fr/rtl2-1-48-192" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/f/fa/RTL2_logo_2015.svg/800px-RTL2_logo_2015.svg.png"></radio>
+	<radio name="Skyrock" URL="http://icecast.skyrock.net/s/natio_mp3_128k" icon="https://upload.wikimedia.org/wikipedia/fr/thumb/5/57/Logo_Skyrock_2011.svg/langfr-220px-Logo_Skyrock_2011.svg.png"></radio>
+	<radio name="Virgin Radio" URL="http://ais-live.cloud-services.paris:8000/virgin.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Virgin_radio_fr.png/110px-Virgin_radio_fr.png"></radio>
+	<radio name="TSF Jazz" URL="http://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/TSFJazz-2017.jpg/150px-TSFJazz-2017.jpg"></radio>
+</racine>
