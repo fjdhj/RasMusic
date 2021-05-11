@@ -21,11 +21,7 @@ public class RasMusic {
 		//Creating the serveur core:
 		Core core = new Core();
 		core.mainPageReload();
-		Server serv = new Server(core);
-		//Test API Apple music
-		/*AppleMusicUser user = new AppleMusicUser();
-		user.login();*/
-		
+		Server serv = new Server(core);		
 		
 	}
 

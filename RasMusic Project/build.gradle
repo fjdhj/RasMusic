@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = 'RasMusic.src.fr.fjdhj.rasmusic.RasMusic'
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.15
 version = '1.0'
 
 repositories {
@@ -12,9 +12,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.api-client:google-api-client:1.23.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-    compile 'com.google.apis:google-api-services-youtube:v3-rev222-1.25.0'
 	implementation 'com.github.goxr3plus:java-stream-player:10.0.2'
 }
 
