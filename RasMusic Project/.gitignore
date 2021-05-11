@@ -4,3 +4,8 @@
 # Ignore Gradle build output directory
 build
 /bin/
+
+#Ignore module and server file
+/ressources/
+/module/
+/data/
